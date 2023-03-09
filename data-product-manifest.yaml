@@ -1,0 +1,74 @@
+---
+version: 0.0.1
+discoveryPort:
+  name: Car prices barcelona - 2 min
+  description: Average car price in barcelona
+  category: customer
+  image: http://google.com
+  autofillUserinfo: true
+  tags: []
+  extra: {}
+inputPorts:
+  - alias: car_input_port
+    description: string
+    tags: []
+    extra: {}
+    syncType: pull
+    type: s3
+    sourceUrn: urn:dv:datasource:18896dde-fbf6-47f0-ab76-fb10ff9a47c4
+    entityId:
+      alias: car_prices
+      createEntity: true
+      type: s3-bucket
+      entityPath: s3a://dp-input-bucket/property_rental/houses_Madrid.parquet
+      entityFilterPatternMatch: "*"
+      sourceSchemaUrn: urn:dv:schema:9d4716d4
+      projectSchemaUrn: urn:dv:schema:9d4716d6
+      fileFormat: parquet
+      delimiter: ","
+      header: true
+      filter: brand = 'BMW'
+      processingTimeColumn:
+        - processing_time
+      actualTimeColumn:
+        - processing_time
+      projection:
+        - brand
+        - model
+        - engine
+        - year
+        - location
+stateManagement:
+  alias: car_prices_barcelona
+  refreshInterval: "*/2 * * * *"
+  updateStrategy: SCD2
+  productStoreState:
+    logicalSchema:
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        engine:
+          type: string
+        year:
+          type: string
+        location:
+          type: string
+    retentionVersions: "10"
+  updateStrategyOptions:
+    entityRef: ${urn:dv:datasource:6d4714c3}:1
+    processingTimeColumn:
+      - "123456"
+    actualTimeColumn:
+      - "123456"
+    uniqueKeyColumns:
+      - customer_id
+    changeTrackColumns:
+      - cust_title_desc
+      - cust_birthday
+      - cust_nationality
+    tags:
+      - test
+transformation:
+  sql: select * from car_prices
