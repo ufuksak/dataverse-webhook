@@ -43,18 +43,7 @@ stateManagement:
   refreshInterval: "*/2 * * * *"
   updateStrategy: SCD2
   productStoreState:
-    logicalSchema:
-      properties:
-        brand:
-          type: string
-        model:
-          type: string
-        engine:
-          type: string
-        year:
-          type: string
-        location:
-          type: string
+    logicalSchemaUrn: "urn:dv:schema:16b18d4e-69ed-47f4-856d-d98f2a7645bf"
     retentionVersions: "10"
   updateStrategyOptions:
     entityRef: ${urn:dv:datasource:6d4714c3}:1
