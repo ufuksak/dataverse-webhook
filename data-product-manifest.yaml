@@ -72,3 +72,9 @@ stateManagement:
       - test
 transformation:
   sql: select * from car_prices
+outputPort:
+  channels:
+  - channelType: JDBC
+    queryType: SQL
+  - channelType: REST-API
+    queryType: SQL
