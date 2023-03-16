@@ -43,7 +43,25 @@ stateManagement:
   refreshInterval: "*/2 * * * *"
   updateStrategy: SCD2
   productStoreState:
-    logicalSchemaUrn: "urn:dv:schema:16b18d4e-69ed-47f4-856d-d98f2a7645bf"
+    logicalSchema:
+      type: object
+      properties:
+        id:
+          type: number
+          description: ID of the property
+        name:
+          type: String
+        subject:
+          type: String
+        stream:
+          type: String
+        marks:
+          type: number
+        modified:
+          type: string
+          description: To store the creation date
+      required:
+        - id
     retentionVersions: "10"
   updateStrategyOptions:
     entityRef: ${urn:dv:datasource:6d4714c3}:1
