@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Car prices barcelona - 5 min - Latest
+  name: Car prices barcelona - 5 min - TransformationList
   description: Average car price in barcelona
   category: customer
   image: http://google.com
