@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Car prices barcelona - 5 min - Latest
+  name: DQ Check - Car prices barcelona - append
   description: Average car price in barcelona
   category: customer
   image: http://google.com
@@ -20,7 +20,7 @@ inputPorts:
       alias: car_prices
       createEntity: true
       type: s3-bucket
-      entityPath: s3a://dp-input-bucket/property_rental/houses_Madrid.parquet
+      entityPath: "s3a://dp-input-bucket/user_car_prices_barcelona_2022/"
       entityFilterPatternMatch: "*"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
       projectSchemaUrn: urn:dv:schema:9d4716d6
@@ -40,48 +40,28 @@ inputPorts:
         - location
 stateManagement:
   alias: car_prices_barcelona
-  refreshInterval: "*/5 * * * *"
-  updateStrategy: SCD2
+  refreshInterval: 00 10 * * *
+  updateStrategy: append
   productStoreState:
     logicalSchema:
-      type: object
       properties:
-        id:
-          type: number
-          description: ID of the property
-        name:
-          type: String
-        subject:
-          type: String
-        stream:
-          type: String
-        marks:
-          type: number
-        modified:
+        brand:
           type: string
-          description: To store the creation date
-      required:
-        - id
+        model:
+          type: string
+        engine:
+          type: string
+        year:
+          type: string
+        location:
+          type: string
     retentionVersions: "10"
-  updateStrategyOptions:
-    entityRef: ${urn:dv:datasource:6d4714c3}:1
-    processingTimeColumn:
-      - "123456"
-    actualTimeColumn:
-      - "123456"
-    uniqueKeyColumns:
-      - customer_id
-    changeTrackColumns:
-      - cust_title_desc
-      - cust_birthday
-      - cust_nationality
-    tags:
-      - test
 transformation:
   sql: select * from car_prices
-outputPort:
-  channels:
-  - channelType: JDBC
-    queryType: SQL
-  - channelType: REST-API
-    queryType: SQL
+
+dataQualityCheck:
+  RecordCountCheck:
+    inputPort:
+      - referenceAlias: car_prices
+        expression: "=="
+        number: 100
