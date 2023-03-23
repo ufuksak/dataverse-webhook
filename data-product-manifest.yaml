@@ -1,93 +1,54 @@
----
 version: 0.0.1
 discoveryPort:
-  name: Car prices barcelona - 5 min - TransformationList
-  description: Average car price in barcelona
-  category: customer
+  name: Maf XConnect Customer Segment
+  description: Maf XConnect Customer Segment
+  category: audience
   image: http://google.com
   autofillUserinfo: true
   tags: []
   extra: {}
 inputPorts:
-  - alias: car_input_port
-    description: string
+  - alias: s3_maf_xconnect_crf_customer_segment
+    description: XConnect CRF Customer Segment
     tags: []
     extra: {}
     syncType: pull
-    type: s3
-    sourceUrn: urn:dv:datasource:8bd4b8e5-7385-4252-a571-3e2378425e80
+    type: 's3'
+    sourceUrn: urn:dv:datasource:18896dde-fbf6-47f0-ab76-fb10ff9a47c4
     entityId:
-      alias: car_prices
+      alias: 's3_maf_xconnect_crf_customer_segment'
       createEntity: true
-      type: s3-bucket
-      entityPath: s3a://dp-input-bucket/property_rental/houses_Madrid.parquet
-      entityFilterPatternMatch: "*"
-      sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
-      fileFormat: parquet
-      delimiter: ","
+      entityName: F_CUSTOMER_SEGMENT
+      type: 's3-bucket'
+      entityPath: "s3://mafh-analytics-data-ingestion/data-ingestion/prd/parsed/rtl_crf_dim_customer_segment/*/F_CUSTOMER_SEGMENT_*.txt"
+      filter: ""
+      fileFormat: 'csv'
+      delimiter: "|"
       header: true
-      filter: brand = 'BMW'
+      inferSchema: true
       processingTimeColumn:
-        - processing_time
+        - processing_date
       actualTimeColumn:
-        - processing_time
+        - processing_date
       projection:
-        - brand
-        - model
-        - engine
-        - year
-        - location
+        - "*"
 stateManagement:
-  alias: car_prices_barcelona
-  refreshInterval: "*/5 * * * *"
-  updateStrategy: SCD2
+  alias: 'maf_xconnect_crf_customer_segment_segment'
+  refreshInterval: 00 10 * * *
+  updateStrategy: overwrite
   productStoreState:
-    logicalSchema:
-      type: object
-      properties:
-        id:
-          type: number
-          description: ID of the property
-        name:
-          type: String
-        subject:
-          type: String
-        stream:
-          type: String
-        marks:
-          type: number
-        modified:
-          type: string
-          description: To store the creation date
-      required:
-        - id
+    inferSchema: true
     retentionVersions: "10"
   updateStrategyOptions:
-    entityRef: ${urn:dv:datasource:6d4714c3}:1
-    processingTimeColumn:
-      - "123456"
-    actualTimeColumn:
-      - "123456"
-    uniqueKeyColumns:
-      - customer_id
-    changeTrackColumns:
-      - cust_title_desc
-      - cust_birthday
-      - cust_nationality
-    tags:
-      - test
+      uniqueKeyColumns:
+        - crf_customer_segment_hash_id
+      changeTrackColumns:
+        - nothing
 transformation:
-  - alias: Transform 1
-    type: SQL
-    description: Fetch data from input table
-    query: SELECT *,'' as __file_name, current_timestamp() as __processing_ts FROM x1
-    references:
-      - alias: xpay_transactions
-        sqlReference: x1
-outputPort:
-  channels:
-  - channelType: JDBC
-    queryType: SQL
-  - channelType: REST-API
-    queryType: SQL
+    - alias: s3_maf_xconnect_crf_customer_transform
+      type: SQL
+      description: Fetch data from input table
+      query: SELECT * FROM s3_maf_xconnect_crf_customer_segment
+      references:
+        - alias: s3_maf_xconnect_crf_customer_segment
+          sqlReference: s3_maf_xconnect_crf_customer_segment
