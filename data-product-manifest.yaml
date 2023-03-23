@@ -14,7 +14,7 @@ inputPorts:
     extra: {}
     syncType: pull
     type: 's3'
-    sourceUrn: urn:dv:datasource:18896dde-fbf6-47f0-ab76-fb10ff9a47c4
+    sourceUrn: urn:dv:datasource:9f98acc2-34bc-417c-bdfb-d1153f54e991
     entityId:
       alias: 's3_maf_xconnect_crf_customer_segment'
       createEntity: true
@@ -45,10 +45,10 @@ stateManagement:
       changeTrackColumns:
         - nothing
 transformation:
-    - alias: s3_maf_xconnect_crf_customer_transform
-      type: SQL
-      description: Fetch data from input table
-      query: SELECT * FROM s3_maf_xconnect_crf_customer_segment
-      references:
-        - alias: s3_maf_xconnect_crf_customer_segment
-          sqlReference: s3_maf_xconnect_crf_customer_segment
+  - alias: s3_maf_xconnect_crf_customer_transform
+    type: SQL
+    description: Fetch data from input table
+    query: SELECT * FROM s3_maf_xconnect_crf_customer_segment
+    references:
+      - alias: s3_maf_xconnect_crf_customer_segment
+        sqlReference: s3_maf_xconnect_crf_customer_segment
