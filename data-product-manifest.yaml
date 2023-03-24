@@ -144,8 +144,12 @@ dataQualityCheck:
     inputPort:
       - referenceAlias: Test0001_input_port
         checks:
-          - column: unique_key1
-          - column: unique_key2
+          - columns:
+              - colA
+              - colB
+          - columns:
+              - colC
+              - colD
   UniqueCombinationCheck:
     inputPort:
       - referenceAlias: Test0001_input_port
