@@ -17,7 +17,7 @@ inputPorts:
     extra: {}
     syncType: pull
     type: s3
-    sourceUrn: urn:dv:datasource:aa975090-000e-45b7-9ba0-787805b633e0
+    sourceUrn: urn:dv:datasource:68512c21-2b64-43a5-8de8-a22a74b8a9fd
     entityId:
       alias: Test0001
       createEntity: true
