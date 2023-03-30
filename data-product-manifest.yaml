@@ -14,7 +14,7 @@ inputPorts:
     extra: {}
     syncType: pull
     type: 's3'
-    sourceUrn: urn:dv:datasource:9f98acc2-34bc-417c-bdfb-d1153f54e991
+    sourceUrn: urn:dv:datasource:0ec70f7b-0691-4059-a0ee-e00a49c62542
     entityId:
       alias: 's3_maf_xconnect_crf_customer_segment'
       createEntity: true
