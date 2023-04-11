@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: DQ Check - Car prices barcelona - DQ preprod
+  name: DQ Preprod Check - Car prices
   description: Average car price in barcelona
   category: customer
   image: http://google.com
@@ -58,10 +58,38 @@ stateManagement:
     retentionVersions: "10"
 transformation:
   sql: select * from car_prices
-
+outputPort:
+  channels:
+    - channelType: REST-API
+      queryType: SQL
+    - channelType: JDBC
+      queryType: SQL
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
       - referenceAlias: car_prices
         expression: "=="
         number: 100
+    stateManagement:
+      referenceAlias: Test0001
+      expression: "=="
+      number: 100
+  NullValueCheck:
+    inputPort:
+      - referenceAlias: car_prices
+        checks:
+          - column: amount
+            expression: ">="
+            number: 0.9
+          - column: card_number
+            expression: ">="
+            number: 0.95
+          - column: auth_code
+            expression: ">="
+            number: 0.9
+    stateManagement:
+      referenceAlias: Test0001
+      checks:
+        - column: amount
+          expression: ">="
+          number: 0.9
