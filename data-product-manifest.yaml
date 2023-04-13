@@ -77,104 +77,29 @@ outputPort:
 dataQualityCheck:
   RecordCountCheck:
     inputPort:
-      - referenceAlias: Test0001_input_port
-        expression: ">="
+      - referenceAlias: car_prices
+        expression: "=="
         number: 100
     stateManagement:
       referenceAlias: Test0001
-      expression: ==
+      expression: "=="
       number: 100
   NullValueCheck:
     inputPort:
-      - referenceAlias: Test0001_input_port
+      - referenceAlias: car_prices
         checks:
-          - column: id
+          - column: amount
             expression: ">="
             number: 0.9
-          - column: name
+          - column: card_number
             expression: ">="
             number: 0.95
-    stateManagement:
-      referenceAlias: Test0001
-      checks:
-        - column: id
-          expression: ">="
-          number: 0.9
-  NullCombinationCheck:
-    stateManagement:
-      referenceAlias: Test0001
-      checks:
-        - column:
-            - email
-            - phone
-          expression: ">="
-          number: 0.99
-  UnacceptableTextValueCheck:
-    inputPort:
-      - referenceAlias: Test0001_input_port
-        checks:
-          - column: UnitOfMass
-            valueList:
-              - KG
-              - kg
-              - gm
-              - gram
-            number: 0.95
-            expression: <=
-          - column: UnitOfvolume
-            valueList:
-              - litre
-              - gallon
-              - barrel
-              - pint
+          - column: auth_code
+            expression: ">="
             number: 0.9
-            expression: <=
     stateManagement:
       referenceAlias: Test0001
       checks:
-        - column: UnitOfLength
-          valueList:
-            - metres
-            - feet
-            - miles
-            - yards
+        - column: amount
+          expression: ">="
           number: 0.9
-          expression: <=
-  UniquenessCheck:
-    inputPort:
-      - referenceAlias: Test0001_input_port
-        checks:
-          - column: unique_key1
-          - column: unique_key2
-  UniqueCombinationCheck:
-    inputPort:
-      - referenceAlias: Test0001_input_port
-        checks:
-          - columns:
-              - colA
-              - colB
-          - columns:
-              - colC
-              - colD
-    stateManagement:
-      referenceAlias: Test0001
-      checks:
-        - columns:
-            - Primary1
-            - Primary2
-        - columns:
-            - Primary3
-            - Primary4
-  DistinctValueCountCheck:
-    inputPort:
-      - referenceAlias: Test0001_input_port
-        checks:
-          - column: CarCategory
-            number: 7
-            expression: <=
-    stateManagement:
-      referenceAlias: Test0001
-      checks:
-        - column: Gender
-          number: 4
-          expression: <=
