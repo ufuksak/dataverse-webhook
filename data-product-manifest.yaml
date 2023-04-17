@@ -44,7 +44,7 @@ stateManagement:
   alias: Test0001
   refreshInterval: 45 15 * * *
   updateStrategy: append
-  retentionVersions: 1
+  retentionVersions: "1"
   productStoreState:
     logicalSchema:
       type: object
