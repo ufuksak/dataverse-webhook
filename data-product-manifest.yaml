@@ -2,7 +2,7 @@
 version: 0.0.1
 discoveryPort:
   name: Data Product Data Quality Rules2
-  alias: Data Product Data Quality Rules2
+  alias: Test0001_input_port
   description: Creating the base table
   category: customer
   image: http://google.com
