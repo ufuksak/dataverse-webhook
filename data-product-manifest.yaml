@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Data Product Data Quality Rules3
+  name: Working DQ Checks new Schema 2104
   alias: Test0001_input_port
   ShortDescription: Weather Forecast of the next 7 days for ahmedabad city
   LongDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
@@ -52,7 +52,7 @@ inputPorts:
       createEntity: true
       entityName: test_scd2.csv
       type: s3-bucket
-      entityPath: s3://dataverse-byte/sample-data/inputData/test_scd2.csv
+      entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       entityFilterPatternMatch: "*.csv"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
       projectSchemaUrn: urn:dv:schema:9d4716d6
@@ -70,10 +70,9 @@ inputPorts:
         - marks
         - modified
 stateManagement:
-  alias: Test0001
+  alias: Test0001_input_port
   refreshInterval: 45 15 * * *
   updateStrategy: append
-  retentionVersions: "1"
   productStoreState:
     logicalSchema:
       type: object
@@ -90,7 +89,7 @@ stateManagement:
           description: To store the creation date
       required:
         - id
-    retentionVersions: "10"
+  retentionVersions: "10"
   updateStrategyOptions:
     uniqueKeyColumns:
       - id
@@ -104,3 +103,89 @@ outputPort:
       queryType: SQL
     - channelType: JDBC
       queryType: SQL
+dataQualityCheck:
+  RecordCountCheck:
+    inputPort:
+      - referenceAlias: Test0001_input_port
+        expression: ">="
+        number: 100
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      expression: "=="
+      number: 100
+  NullValueCheck:
+    inputPort:
+      - referenceAlias: Test0001_input_port
+        checks:
+          - column: amount
+            expression: ">="
+            number: 9
+          - column: payment_option
+            expression: ">="
+            number: 8
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - column: amount
+          expression: ">="
+          number: 0.9
+  NullCombinationCheck:
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - columns:
+            - transaction_reference
+            - order_reference
+          expression: ">="
+          number: 0.99
+  UnacceptableTextValueCheck:
+    inputPort:
+      - referenceAlias: Test0001_input_port
+        checks:
+          - column: payment_option
+            valueList:
+              - VISA
+              - MASTERCARD
+            number: 0.95
+            expression: ">="
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - column: payment_option
+          valueList:
+            - MASTERCARD
+            - VISA
+          number: 0.9
+          expression: ">="
+  UniquenessCheck:
+    inputPort:
+      - referenceAlias: Test0001_input_port
+        checks:
+          - column: store_group_name
+          - column: store_name
+  UniqueCombinationCheck:
+    inputPort:
+      - referenceAlias: Test0001_input_port
+        checks:
+          - columns:
+              - store_name
+              - transaction_Reference
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - columns:
+            - store_name
+            - transaction_Reference
+  DistinctValueCountCheck:
+    inputPort:
+      - referenceAlias: Test0001_input_port
+        checks:
+          - column: payment_option
+            number: 2
+            expression: "<="
+    stateManagement:
+      referenceAlias: Test0001_input_port
+      checks:
+        - column: payment_option
+          number: 2
+          expression: "<="
