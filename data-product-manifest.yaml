@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Working DQ Checks new Schema 2104
+  name: Record Count Check 21/04
   alias: Test0001_input_port
   ShortDescription: Weather Forecast of the next 7 days for ahmedabad city
   LongDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
@@ -129,63 +129,3 @@ dataQualityCheck:
         - column: amount
           expression: ">="
           number: 0.9
-  NullCombinationCheck:
-    stateManagement:
-      referenceAlias: Test0001_input_port
-      checks:
-        - columns:
-            - transaction_reference
-            - order_reference
-          expression: ">="
-          number: 0.99
-  UnacceptableTextValueCheck:
-    inputPort:
-      - referenceAlias: Test0001_input_port
-        checks:
-          - column: payment_option
-            valueList:
-              - VISA
-              - MASTERCARD
-            number: 0.95
-            expression: ">="
-    stateManagement:
-      referenceAlias: Test0001_input_port
-      checks:
-        - column: payment_option
-          valueList:
-            - MASTERCARD
-            - VISA
-          number: 0.9
-          expression: ">="
-  UniquenessCheck:
-    inputPort:
-      - referenceAlias: Test0001_input_port
-        checks:
-          - column: store_group_name
-          - column: store_name
-  UniqueCombinationCheck:
-    inputPort:
-      - referenceAlias: Test0001_input_port
-        checks:
-          - columns:
-              - store_name
-              - transaction_Reference
-    stateManagement:
-      referenceAlias: Test0001_input_port
-      checks:
-        - columns:
-            - store_name
-            - transaction_Reference
-  DistinctValueCountCheck:
-    inputPort:
-      - referenceAlias: Test0001_input_port
-        checks:
-          - column: payment_option
-            number: 2
-            expression: "<="
-    stateManagement:
-      referenceAlias: Test0001_input_port
-      checks:
-        - column: payment_option
-          number: 2
-          expression: "<="
