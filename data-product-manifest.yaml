@@ -1,11 +1,13 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Data Product Data Quality Rules2
+  name: Data Product Data Quality Rules3
   alias: Test0001_input_port
   ShortDescription: Weather Forecast of the next 7 days for ahmedabad city
   LongDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
-  Tags: Weather, Forecast, City, Geospatial
+  Tags:
+    - Madrid
+    - House Rental
   VersionInformation: '0.1'
   URN: urn:dv:dataproduct:6d4714c3
   Organization: MAF
@@ -17,7 +19,7 @@ discoveryPort:
   RefreshFrequency: Daily
   IndustryDomain: Meteorology
   Function: Forecast
-  Regulatory-Fields:
+  RegulatoryFields:
     Privacy-PublicOrPrivate: Public
     CustomerSpecific-PIIOrnonPII: non-PII
     Origin-MachineGeneratedOrHumanGenerated: Machine generated
