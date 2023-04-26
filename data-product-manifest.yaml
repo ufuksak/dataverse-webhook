@@ -71,7 +71,7 @@ inputPorts:
         - modified
 stateManagement:
   alias: Test0001_input_port
-  refreshInterval: */2 * * * *
+  refreshInterval: "*/2 * * * *"
   updateStrategy: append
   productStoreState:
     logicalSchema:
