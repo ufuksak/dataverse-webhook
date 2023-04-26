@@ -6,7 +6,7 @@ discoveryPort:
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
-    - Madrid
+    - Madrid2
     - House Rental
   versionInformation: '0.1'
   urn: urn:dv:dataproduct:6d4714c3
