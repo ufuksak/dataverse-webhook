@@ -43,7 +43,7 @@ inputPorts:
 stateManagement:
   alias: Test0001
   refreshInterval: 45 15 * * *
-  updateStrategy: append
+  updateStrategy: SCD2
   retentionVersions: "1"
   productStoreState:
     logicalSchema:
