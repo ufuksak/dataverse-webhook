@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Example Working DQ Checks new Schema 2105
+  name: Example Working DQ Checks new Schema 2107
   alias: Test0001_input_port
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
