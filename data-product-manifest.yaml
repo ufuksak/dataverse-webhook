@@ -1,14 +1,43 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Data Product Data Quality Rules
-  description: Creating the base table
-  category: customer
-  image: http://google.com
-  autofillUserinfo: true
+  name: Example Working DQ Checks new Schema 2105
+  alias: Test0001_input_port
+  shortDescription: Weather Forecast of the next 7 days for ahmedabad city
+  longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
     - Madrid
     - House Rental
+  versionInformation: '0.1'
+  urn: urn:dv:dataproduct:6d4714c3
+  organization: MAF
+  createdBy: Anokhi
+  createdOn: '212249844399'
+  fromMinDataDate: '2022-04-07'
+  toMaxDataDate: '2022-04-14'
+  lastUpdated: '2022-04-07'
+  refreshFrequency: Daily
+  industryDomain: Meteorology
+  function: Forecast
+  regulatoryFields:
+    privacy-PublicOrPrivate: Public
+    customerSpecific-PIIOrnonPII: non-PII
+    origin-MachineGeneratedOrHumanGenerated: Machine generated
+    monetary-FinancialOrnoFinancialData: non-financial
+  qualityInformation:
+    dataAccuracy: 95%
+  authorisation-Information:
+    organization: MAF, Accenture
+    geography:
+      type: state
+      value: Gujarat
+    industryDomain:
+    - Meteorology , Weather
+    refreshInterval: Daily
+    typeofAuthorisation-InclusionExclusion: Inclusion
+  category: customer
+  image: http://google.com
+  autofillUserinfo: true
   extra: {}
 inputPorts:
   - alias: Test0001_input_port
