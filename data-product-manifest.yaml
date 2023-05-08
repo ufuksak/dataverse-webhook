@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Example Working DQ Checks new Schema 2107
+  name: Example Working DQ Checks new Schema 2110
   alias: Test0001_input_port
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
@@ -20,10 +20,10 @@ discoveryPort:
   industryDomain: Meteorology
   function: Forecast
   regulatoryFields:
-    privacy-PublicOrPrivate: Public
-    customerSpecific-PIIOrnonPII: non-PII
-    origin-MachineGeneratedOrHumanGenerated: Machine generated
-    monetary-FinancialOrnoFinancialData: non-financial
+    privacy_PublicOrPrivate: Public
+    customerSpecific_PIIOrnonPII: non-PII
+    origin_MachineGeneratedOrHumanGenerated: Machine generated
+    monetary_FinancialOrnoFinancialData: non-financial
   qualityInformation:
     dataAccuracy: 95%
   authorisation-Information:
