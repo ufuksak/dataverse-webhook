@@ -46,7 +46,7 @@ inputPorts:
     extra: {}
     syncType: pull
     type: s3
-    dataSetUrn: urn:dv:datasource:abc456eb-fd68-4ebc-907c-cb05d1d98031
+    dataSetUrn: urn:dv:dataSet:38b0436e-17da-4d84-bdcf-e98b89725420
     entityId:
       alias: Test0001
       createEntity: true
