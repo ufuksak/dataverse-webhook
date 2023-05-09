@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: Ufuk DP - search regulatoryFields 1
+  name: updateStrategy - SCD2 - 1
   alias: Test0001_input_port
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
@@ -72,7 +72,7 @@ inputPorts:
 stateManagement:
   alias: Test0001_input_port
   refreshInterval: "*/2 * * * *"
-  updateStrategy: append
+  updateStrategy: SCD2
   productStoreState:
     logicalSchema:
       type: object
