@@ -53,7 +53,7 @@ inputPorts:
       entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       entityFilterPatternMatch: "*.csv"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d4
+      projectSchemaUrn: 
       entityVariables:
         - key: timeStamp
           value: date-YYYYMMdd
