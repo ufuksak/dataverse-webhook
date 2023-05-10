@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: updateStrategy - SCD2 - 234
+  name: updateStrategy - SCD2 - 234567
   alias: Test0001_input_port
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
@@ -53,7 +53,7 @@ inputPorts:
       entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       entityFilterPatternMatch: "*.csv"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
+      projectSchemaUrn: 
       fileFormat: csv
       delimiter: ","
       header: true
