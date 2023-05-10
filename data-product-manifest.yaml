@@ -55,7 +55,7 @@ inputPorts:
       entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       entityFilterPatternMatch: "*.csv"
       sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
+      projectSchemaUrn: 
       fileFormat: csv
       delimiter: ","
       header: true
