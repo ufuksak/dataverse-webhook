@@ -48,7 +48,6 @@ inputPorts:
     type: s3
     dataSetUrn: urn:dv:dataset:891b55a9-9b1e-4fa6-ba3c-965c93104478
     entityId:
-      alias: Test0001
       createEntity: true
       entityName: test_scd2.csv
       entityPath: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
