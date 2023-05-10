@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: SCD2 Test 1 - 3455
+  name: TestMestJest1234
   alias: Test0001_input_port
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
