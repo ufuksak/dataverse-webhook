@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: MultiTransformation Scenario 18-May-23-Test1
+  name: MultiTransformation Scenario 18-May-23-Test1 345
   alias: TestMultiTransform_01
   shortDescription: Test search functionality
   longDescription: search maximum characters for long description
