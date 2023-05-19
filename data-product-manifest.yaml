@@ -1,12 +1,43 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: DQ Preprod Check - Car prices
-  description: Average car price in barcelona
-  category: customer
+  name: MultiTransformation Scenario 18-May-23-Test1 345
+  alias: TestMultiTransform_01
+  shortDescription: Test search functionality
+  longDescription: search maximum characters for long description
+  tags:
+    - Dataverse
+    - Finance
+  versionInformation: '0.1'
+  urn: urn:dv:dataproduct:6d4714c3
+  organization: MAF
+  createdBy: Ashwini
+  createdOn: '212249844399'
+  fromMinDataDate: '2022-04-07'
+  toMaxDataDate: '2022-04-14'
+  lastUpdated: '2022-04-07'
+  refreshFrequency: Daily
+  industryDomain: Money
+  function: Retail
+  regulatoryFields:
+    privacy_PublicOrPrivate: Public
+    customerSpecific_PIIOrnonPII: non-PII
+    origin_MachineGeneratedOrHumanGenerated: Machine generated
+    monetary_FinancialOrnoFinancialData: non-financial
+  qualityInformation:
+    dataAccuracy: 95%
+  authorisation-Information:
+    organization: MAF, Accenture
+    geography:
+      type: state
+      value: Bengaluru
+    industryDomain:
+    - ArtificialIntelligence , dataAnalytics
+    refreshInterval: Daily
+    typeofAuthorisation-InclusionExclusion: Inclusion
+  category: client
   image: http://google.com
   autofillUserinfo: true
-  tags: []
   extra: {}
 inputPorts:
   - alias: car_input_port
@@ -15,13 +46,12 @@ inputPorts:
     extra: {}
     syncType: pull
     type: s3
-    sourceUrn: urn:dv:datasource:8bd4b8e5-7385-4252-a571-3e2378425e80
+    dataSetUrn: urn:dv:dataset:8bd4b8e5-7385-4252-a571-3e2378425e80
     entityId:
-      alias: car_prices
       createEntity: true
-      type: s3-bucket
       entityPath: "s3a://dp-input-bucket/user_car_prices_barcelona_2022/"
       entityFilterPatternMatch: "*"
+      incrementalLoad: false
       sourceSchemaUrn: urn:dv:schema:9d4716d4
       projectSchemaUrn: urn:dv:schema:9d4716d6
       fileFormat: parquet
@@ -40,7 +70,7 @@ inputPorts:
         - location
 stateManagement:
   alias: car_prices_barcelona
-  refreshInterval: 00 10 * * *
+  refreshInterval: 0/15 * * * *
   updateStrategy: append
   productStoreState:
     logicalSchema:
@@ -55,41 +85,25 @@ stateManagement:
           type: string
         location:
           type: string
-    retentionVersions: "10"
+  retentionVersions: "10"
 transformation:
-  sql: select * from car_prices
+    - alias: "car_price_step_1"
+      description: "step_1"
+      type: "SQL"
+      query: "SELECT * FROM car_input_port"
+      references:
+        - alias: 'car_input_port'
+          sqlReference: 'car_input_port'
+    - alias: "car_price_step_2"
+      description: "step_2"
+      query: "SELECT * FROM car_price_step_1"
+      type: "SQL"
+      references:
+        - alias: 'car_price_step_1'
+          sqlReference: 'car_price_step_1'
 outputPort:
   channels:
     - channelType: REST-API
       queryType: SQL
     - channelType: JDBC
       queryType: SQL
-dataQualityCheck:
-  RecordCountCheck:
-    inputPort:
-      - referenceAlias: car_prices
-        expression: "=="
-        number: 100
-    stateManagement:
-      referenceAlias: Test0001
-      expression: "=="
-      number: 100
-  NullValueCheck:
-    inputPort:
-      - referenceAlias: car_prices
-        checks:
-          - column: amount
-            expression: ">="
-            number: 0.9
-          - column: card_number
-            expression: ">="
-            number: 0.95
-          - column: auth_code
-            expression: ">="
-            number: 0.9
-    stateManagement:
-      referenceAlias: Test0001
-      checks:
-        - column: amount
-          expression: ">="
-          number: 0.9
