@@ -46,7 +46,7 @@ inputPorts:
     extra: {}
     syncType: pull
     type: s3
-    dataSetUrn: urn:dv:dataset:1c3b83a3-4bad-4477-9eb6-69cd34de4e3f
+    dataSetUrn: urn:dv:dataset:7a422ae4-7015-48cc-813a-018659500cb9
     entityId:
       createEntity: true
       entityPath: "s3a://dp-input-bucket/user_car_prices_barcelona_2022/"
