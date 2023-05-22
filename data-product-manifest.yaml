@@ -1,7 +1,7 @@
 ---
 version: 0.0.1
 discoveryPort:
-  name: 22-May-23-Test1-2
+  name: 22-May-23-Test1-3
   alias: TestMultiTransform_01
   shortDescription: Test search functionality
   longDescription: search maximum characters for long description
