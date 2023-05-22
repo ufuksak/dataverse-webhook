@@ -78,7 +78,7 @@ inputPorts:
         - modified
 stateManagement:
   alias: Test0001_input_port
-  refreshInterval: 45 15 * * *
+  refreshInterval: */4 * * * *
   updateStrategy: SCD2
   productStoreState:
     logicalSchema:
