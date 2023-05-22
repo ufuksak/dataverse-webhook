@@ -70,7 +70,7 @@ inputPorts:
         - location
 stateManagement:
   alias: car_prices_barcelona
-  refreshInterval: 0/15 * * * *
+  refreshInterval: "*/4 * * * *"
   updateStrategy: append
   productStoreState:
     logicalSchema:
