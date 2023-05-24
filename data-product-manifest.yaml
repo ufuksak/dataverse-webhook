@@ -1,5 +1,5 @@
 ---
-alias: Test0001_input_port
+alias: Test0001_input_port. 1-2
 version: 0.1.0
 discoveryPort:
   name: Weather Forecast for Ahmedabad
