@@ -139,6 +139,6 @@ productState:
       - string
     tags:
       - string
-logicalSchemaUrn: urn:dv:schema:49dc6a33-a0ae-44fe-93f8-32609b2d49ce
-encodingType: HASH
-columnsToEncode: []
+  logicalSchemaUrn: urn:dv:schema:49dc6a33-a0ae-44fe-93f8-32609b2d49ce
+  encodingType: HASH
+  columnsToEncode: []
