@@ -139,17 +139,17 @@ productState:
       - string
     tags:
       - string
-logicalSchema:
-    properties:
-      brand:
-        type: string
-      model:
-        type: string
-      engine:
-        type: string
-      year:
-        type: string
-      location:
-        type: string
+  logicalSchema:
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        engine:
+          type: string
+        year:
+          type: string
+        location:
+          type: string
 encodingType: HASH
 columnsToEncode: []
