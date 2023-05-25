@@ -102,6 +102,7 @@ transformation:
   - alias: "car_price_step_1"
     description: "step_1"
     type: "SQL"
+    sequenceNo: '1'
     query: "SELECT * FROM car_input_port"
     references:
       - alias: 'car_input_port'
@@ -110,6 +111,7 @@ transformation:
     description: "step_2"
     query: "SELECT * FROM car_price_step_1"
     type: "SQL"
+    sequenceNo: '2'
     references:
       - alias: 'car_price_step_1'
         sqlReference: 'car_price_step_1'
