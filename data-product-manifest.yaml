@@ -1,8 +1,8 @@
 ---
-alias: Test0001_input_port10
+alias: Test0001_input_port11
 version: 0.1.0
 discoveryPort:
-  name: Weather Forecast10
+  name: Weather Forecast11
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags: 
@@ -99,16 +99,20 @@ inputPorts:
         - processing_time
         - file_name 
 transformation:
-  - alias: Transform1
-    type: SQL
-    sequenceNo: '1'
-    description: Join input1 and input2 to get the actual member name
-    query: select * from i1 inner join i2 on i1.id=i2.id
-  - alias: Transform2
-    type: SQL
-    sequenceNo: '2'
-    description: Generate the sum of marks on a name level
-    query: select name,sum(marks) from t1 group by name
+  - alias: "car_price_step_1"
+    description: "step_1"
+    type: "SQL"
+    query: "SELECT * FROM car_input_port"
+    references:
+      - alias: 'car_input_port'
+        sqlReference: 'car_input_port'
+  - alias: "car_price_step_2"
+    description: "step_2"
+    query: "SELECT * FROM car_price_step_1"
+    type: "SQL"
+    references:
+      - alias: 'car_price_step_1'
+        sqlReference: 'car_price_step_1'
 controlPort:
   dataQualityRules:
     SomeCheck:
