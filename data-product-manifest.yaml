@@ -1,8 +1,8 @@
 ---
-alias: Test0001_input_port7
+alias: Test0001_input_port8
 version: 0.1.0
 discoveryPort:
-  name: Weather Forecast7
+  name: Weather Forecast8
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags: 
