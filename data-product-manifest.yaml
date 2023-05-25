@@ -1,8 +1,8 @@
 ---
-alias: Test0001_input_port3
+alias: Test0001_input_port4
 version: 0.1.0
 discoveryPort:
-  name: Weather Forecast for Ahmedabad Test Latest3
+  name: Weather Forecast4
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags: 
@@ -126,7 +126,7 @@ outputPort:
       queryType: SQL
 productState:
   alias: string
-  refreshInterval: string
+  refreshInterval: 0/15 * * * *
   updateStrategy: append
   updateStrategyOptions:
     entityRef: "${urn:dv:dataset:6d4714c3}:1"
