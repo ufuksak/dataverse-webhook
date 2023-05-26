@@ -40,7 +40,7 @@ inputPorts:
     tags: []
     syncType: pull
     type: s3-csv
-    dataSetUrn: urn:dv:dataset:e4d048d1-a491-4192-aaa0-30bb09f1f291
+    dataSetUrn: urn:dv:dataset:e5120ec5-2d03-4496-a779-45f0d669b563
     entity:
       createEntity: true
       entityPath: s3a://mafh-analytics-data-ingestion/data-ingestion/prd/parsed/rtl_crf_dim_account/
