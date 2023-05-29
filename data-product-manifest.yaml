@@ -29,7 +29,7 @@ inputPorts:
   tags: []
   syncType: pull
   type: s3-csv
-  dataSetUrn: urn:dv:dataset:7dc8f13d-104a-4cc7-a8a2-00c5135d62ec
+  dataSetUrn: urn:dv:dataset:74e68644-da8a-4b12-806e-eef6a42648e1
   incrementalLoad: true
   incrementalStrategy:
     frequency:
@@ -48,7 +48,7 @@ inputPorts:
   tags: []
   syncType: pull
   type: s3-parquet
-  dataSetUrn: urn:dv:dataset:7dc8f13d-104a-4cc7-a8a2-00c5135d62ec
+  dataSetUrn: urn:dv:dataset:74e68644-da8a-4b12-806e-eef6a42648e1
   incrementalLoad: true
   incrementalStrategy:
     frequency:
