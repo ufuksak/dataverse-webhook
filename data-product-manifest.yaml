@@ -1,17 +1,14 @@
 ---
 version: 0.1.0
-alias: Test00011233
+alias: Test_kk_maf
 discoveryPort:
-  name: Weather1234533
+  name: Test_kk_maf
+  alias: Test_kk_maf
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
-  longDescription: Weather Forecast of the next 7 days for ahmedabad city along with
-    the accuracy of the previous forecast
+  longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
-  - Weather
-  - Forecast
-  - City
-  - Geospatial
-  email: user@maf.ae
+    - MAF Data
+    - Schedule Run
   dataTimeRange:
     fromMinDataDate: '2022-04-07'
     toMinDataDate: '2022-04-14'
@@ -24,247 +21,136 @@ discoveryPort:
     dataOrigin: machineGenerated
     monetaryInfo: nonFinancialData
 inputPorts:
-- alias: car_prices_csv
-  description: string
-  tags: []
-  syncType: pull
-  type: s3-csv
-  dataSetUrn: urn:dv:dataset:7dc8f13d-104a-4cc7-a8a2-00c5135d62ec
-  incrementalLoad: true
-  incrementalStrategy:
-    frequency:
-    - keyReference: timeStamp
-      mode: range
-      interval: -5
-  entity:
-    path: s3a://mafh-analytics-data-ingestion/data-ingestion/prd/parsed/rtl_crf_dim_account/
-    advanceOptions:
-      delimiter: "|"
-    variables:
-    - key: timeStamp
-      value: date-YYYYMMdd
-- alias: car_prices
-  description: string
-  tags: []
-  syncType: pull
-  type: s3-parquet
-  dataSetUrn: urn:dv:dataset:7dc8f13d-104a-4cc7-a8a2-00c5135d62ec
-  incrementalLoad: true
-  incrementalStrategy:
-    frequency:
-    - keyReference: timeStamp
-      mode: range
-      interval: -5
-  entity:
-    path: s3a://mafh-analytics-data-ingestion/data-ingestion/prd/parsed/rtl_crf_dim_account/
-    variables:
-    - key: timeStamp
-      value: date-YYYYMMdd
-    advanceOptions:
-      mergeSchema: true
+  - alias: Test_input_port
+    description: string
+    type: s3-csv
+    tags: []
+    syncType: pull
+    dataSetUrn: urn:dv:dataset:7dc8f13d-104a-4cc7-a8a2-00c5135d62ec
+    incrementalLoad: true
+    incrementalStrategy:
+      frequency:
+        - keyReference: timeStamp
+          mode: range
+          interval: -5
+    entity:
+      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
+      variables:
+        - key: timeStamp
+          value: date-YYYYMMdd
+      advanceOptions:
+        delimiter: ','
+        header: true
 productState:
-  refreshInterval: 0/15 * * * *
-  updateStrategy: scd2
-  updateStrategyOptions:
-    uniqueKeyColumns:
-    - id
-    actualTimeColumn: id
-    changeTrackingColumns:
-    - marks
-    timeTrackingColumn: modified
+  refreshInterval: "*/10 * * * *"
+  updateStrategy: append
   logicalSchema:
-    schemaDefinition:
-    - version: 1
-      structure:
-        properties:
-          brand:
-            type: string
-          model:
-            type: string
-          engine:
-            type: string
-          year:
-            type: string
-          location:
-            type: string
-      isActive: true
     properties:
-      brand:
-        type: string
-      model:
-        type: string
-      engine:
-        type: string
-      year:
-        type: string
-      location:
-        type: string
-  encodingType:
-    encodingType: HASH
-    columnsToEncode:
-    - A
-    - B
-  partitionColumns:
-  - A
-  - B
-  columnsToEncode: []
+      id:
+        type: number
+      name:
+        type: String
+      marks:
+        type: number
+      modified:
+        type: datetime
 transformation:
-- alias: car_price_step_1
-  description: step_1
-  type: SQL
-  sequenceNo: '4'
-  query: SELECT * FROM car_input_port
-  references:
-  - alias: car_input_port
-    sqlReference: car_input_port
-- alias: car_price_step_2
-  description: step_2
-  query: SELECT * FROM car_price_step_1
-  type: SQL
-  sequenceNo: '2'
-  references:
-  - alias: car_price_step_1
-    sqlReference: car_price_step_1
+  - alias: Test_input_port_trans
+    description: step_1
+    type: SQL
+    sequenceNo: '1'
+    query: SELECT * FROM Test_input_port
+    references:
+      - alias: Test_input_port
+        sqlReference: Test_input_port        
+outputPort:
+  subscriptionChannels:
+    - channelType: JDBC
+      queryType: SQL
 controlPort:
   dataQualityCheck:
     RecordCountCheck:
       inputPort:
-      - referenceAlias: car_prices
-        expression: "=="
-        number: 100
-      - referenceAlias: car_prices_csv
-        expression: "<="
-        number: 200
-      transformation:
-      - referenceAlias: trans_step
-        expression: "=="
-        number: 100
-      - referenceAlias: trans_step
-        expression: "<="
-        number: 200
+        - referenceAlias: Test_input_port
+          expression: ">="
+          number: 100
       productState:
-        referenceAlias: Test0001
-        expression: "=="
+        referenceAlias: Test0001_input_port
+        expression: ==
         number: 100
     NullValueCheck:
       inputPort:
-      - referenceAlias: car_prices
+        - referenceAlias: Test_input_port
+          checks:
+            - column: amount
+              expression: ">="
+              number: 9
+            - column: payment_option
+              expression: ">="
+              number: 8
+      productState:
+        referenceAlias: Test0001_input_port
         checks:
-        - column: id
-          expression: ">="
-          number: 90
-        - column: name
-          expression: ">="
-          number: 90
+          - column: amount
+            expression: ">="
+            number: 0.9
+    NullCombinationCheck:
+      productState:
+        referenceAlias: Test0001_input_port
+        checks:
+          - columns:
+              - transaction_reference
+              - order_reference
+            expression: ">="
+            number: 0.99
     UnacceptableTextValueCheck:
       inputPort:
-      - referenceAlias: car_prices
-        checks:
-        - column: colA
-          valueList:
-          - A
-          - B
-          - C
-          number: 0.5
-          expression: ">="
-        - column: colA
-          valueList:
-          - A
-          - B
-          - C
-          number: 0.5
-          expression: ">="
-      transformation:
-      - referenceAlias: car_prices
-        checks:
-        - column: colA
-          valueList:
-          - A
-          - B
-          - C
-          number: 0.5
-          expression: ">="
-        - column: colA
-          valueList:
-          - A
-          - B
-          - C
-          number: 0.5
-          expression: ">="
+        - referenceAlias: Test_input_port
+          checks:
+            - column: payment_option
+              valueList:
+                - VISA
+                - MASTERCARD
+              number: 0.95
+              expression: ">="
       productState:
-        referenceAlias: Test0001
+        referenceAlias: Test0001_input_port
         checks:
-        - column: colA
-          valueList:
-          - A
-          - B
-          - C
-          number: 0.5
-          expression: ">="
-        - column: colA
-          valueList:
-          - A
-          - B
-          - C
-          number: 0.5
-          expression: ">="
+          - column: payment_option
+            valueList:
+              - MASTERCARD
+              - VISA
+            number: 0.9
+            expression: ">="
+    UniquenessCheck:
+      inputPort:
+        - referenceAlias: Test_input_port
+          checks:
+            - column: store_group_name
+            - column: store_name
     UniqueCombinationCheck:
       inputPort:
-      - referenceAlias: car_prices
-        checks:
-        - columns:
-          - colA
-          - colB
-        - columns:
-          - colD
-          - colE
-      transformation:
-      - referenceAlias: trans_ref
-        checks:
-        - columns:
-          - colA
-          - colB
-        - columns:
-          - colD
-          - colE
+        - referenceAlias: Test_input_port
+          checks:
+            - columns:
+                - store_name
+                - transaction_Reference
       productState:
-        referenceAlias: Test0001
+        referenceAlias: Test0001_input_port
         checks:
-        - columns:
-          - colA
-          - colB
-        - columns:
-          - colA
-          - colB
+          - columns:
+              - store_name
+              - transaction_Reference
     DistinctValueCountCheck:
       inputPort:
-      - referenceAlias: car_prices
-        checks:
-        - column: colA
-          number: 3
-          expression: ">="
-        - column: colC
-          number: 2
-          expression: ">="
-      transformation:
-      - referenceAlias: trans_ref
-        checks:
-        - column: colA
-          number: 3
-          expression: ">="
-        - column: colB
-          number: 4
-          expression: ">="
+        - referenceAlias: Test_input_port
+          checks:
+            - column: payment_option
+              number: 2
+              expression: "<="
       productState:
-        referenceAlias: Test0001
+        referenceAlias: Test0001_input_port
         checks:
-        - column: colA
-          number: 3
-          expression: ">="
-        - column: colA
-          number: 3
-          expression: ">="
-outputPort:
-  subscriptionChannels:
-  - channelType: JDBC
-    queryType: SQL
+          - column: payment_option
+            number: 2
+            expression: "<="
