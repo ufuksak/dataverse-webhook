@@ -23,7 +23,7 @@ discoveryPort:
 inputPorts:
   - alias: Test_input_port
     description: string
-    type: s3-csv
+    type: s3-parquet
     tags: []
     syncType: pull
     dataSetUrn: urn:dv:dataset:b9296ba6-606b-4dbf-95e6-961bc0dc0468
