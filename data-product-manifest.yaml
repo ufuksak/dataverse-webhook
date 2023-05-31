@@ -40,7 +40,7 @@ inputPorts:
           value: date-YYYYMMdd
       advanceOptions:
         delimiter: ','
-        header: true
+        header: 'true'
 productState:
   refreshInterval: "*/10 * * * *"
   updateStrategy: append
