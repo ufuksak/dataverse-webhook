@@ -1,18 +1,23 @@
 ---
 version: 0.1.0
-alias: Test_kk_maf12
+alias: SCD2_testing
 discoveryPort:
-  name: Test_kk_maf12
-  alias: Test_kk_maf
+  name: SCD2 changes implementation Verification 31 May Test 1
+  alias: Test0001_input_port
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
-    - MAF Data
-    - Schedule Run
-  dataTimeRange:
-    fromMinDataDate: '2022-04-07'
-    toMinDataDate: '2022-04-14'
-    timeColumn: '2022-04-07'
+    - Madrid
+    - House Rental
+  versionInformation: '0.1'
+  urn: urn:dv:dataproduct:6d4714c3
+  organization: MAF
+  createdBy: Ashwini
+  createdOn: '212249844399'
+  fromMinDataDate: '2022-04-07'
+  toMaxDataDate: '2022-04-14'
+  lastUpdated: '2022-04-07'
+  refreshFrequency: Daily
   industryDomain: Meteorology
   function: Forecast
   regulatoryFields:
@@ -20,30 +25,45 @@ discoveryPort:
     customerInfo: nonPII
     dataOrigin: machineGenerated
     monetaryInfo: nonFinancialData
+  qualityInformation:
+    dataAccuracy: 95%
+  authorisation-Information:
+    organization: MAF, Accenture
+    geography:
+      type: state
+      value: Gujarat
+    industryDomain:
+    - Meteorology , Weather
+    refreshInterval: Daily
+    typeofAuthorisation-InclusionExclusion: Inclusion
+  category: customer
+  image: http://google.com
+  autofillUserinfo: true
+  extra: {}
 inputPorts:
-  - alias: Test_input_port
-    description: string
+  - alias: Test0001_input_port
+    description: dqcheck
     type: s3-csv
     tags: []
     syncType: pull
     dataSetUrn: urn:dv:dataset:b9296ba6-606b-4dbf-95e6-961bc0dc0468
-    incrementalLoad: true
-    incrementalStrategy:
-      frequency:
-        - keyReference: timeStamp
-          mode: range
-          interval: -5
     entity:
-      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
+      path: s3://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
       variables:
         - key: timeStamp
           value: date-YYYYMMdd
       advanceOptions:
         delimiter: ','
         header: true
+      filter: ""
+      projection:
+        - id
+        - name
+        - marks
+        - modified
 productState:
   refreshInterval: "*/10 * * * *"
-  updateStrategy: append
+  updateStrategy: scd2
   logicalSchema:
     properties:
       id:
@@ -54,103 +74,23 @@ productState:
         type: number
       modified:
         type: datetime
+  updateStrategyOptions:
+    actualTimeColumn: nothing
+    uniqueKeyColumns:
+        - id
+    changeTrackingColumns:
+        - marks
+    timeTrackingColumn: modified
 transformation:
-  - alias: Test_input_port_trans
+  - alias: Test0001_input_port_trans
     description: step_1
     type: SQL
     sequenceNo: '1'
-    query: SELECT * FROM Test_input_port
+    query: SELECT * FROM Test0001_input_port
     references:
-      - alias: Test_input_port
-        sqlReference: Test_input_port        
+      - alias: Test0001_input_port
+        sqlReference: Test0001_input_port
 outputPort:
   subscriptionChannels:
     - channelType: JDBC
       queryType: SQL
-controlPort:
-  dataQualityCheck:
-    RecordCountCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          expression: ">="
-          number: 100
-      productState:
-        referenceAlias: Test0001_input_port
-        expression: ==
-        number: 100
-    NullValueCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: amount
-              expression: ">="
-              number: 9
-            - column: payment_option
-              expression: ">="
-              number: 8
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: amount
-            expression: ">="
-            number: 0.9
-    NullCombinationCheck:
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - columns:
-              - transaction_reference
-              - order_reference
-            expression: ">="
-            number: 0.99
-    UnacceptableTextValueCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: payment_option
-              valueList:
-                - VISA
-                - MASTERCARD
-              number: 0.95
-              expression: ">="
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: payment_option
-            valueList:
-              - MASTERCARD
-              - VISA
-            number: 0.9
-            expression: ">="
-    UniquenessCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: store_group_name
-            - column: store_name
-    UniqueCombinationCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - columns:
-                - store_name
-                - transaction_Reference
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - columns:
-              - store_name
-              - transaction_Reference
-    DistinctValueCountCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: payment_option
-              number: 2
-              expression: "<="
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: payment_option
-            number: 2
-            expression: "<="
