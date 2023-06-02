@@ -10,9 +10,9 @@ discoveryPort:
     - MAF Data
     - Schedule Run
   dataTimeRange:
-    fromMinDataDate: '2022-04-07'
-    toMinDataDate: '2022-04-14'
-    timeColumn: '2022-04-07'
+    fromMinDataDate: '2022-08-07T21:31:12.276Z'
+    toMinDataDate: '2022-08-14T21:31:12.276Z'
+    timeColumn: '2022-08-12T21:31:12.276Z'
   industryDomain: Meteorology
   function: Forecast
   regulatoryFields:
