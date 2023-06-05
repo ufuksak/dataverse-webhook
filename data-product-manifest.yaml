@@ -39,7 +39,7 @@ inputPorts:
         header: true
 productState:
   refreshInterval: "*/10 * * * *"
-  updateStrategy: append
+  updateStrategy: scd1
   logicalSchema:
     properties:
       id:
