@@ -53,7 +53,7 @@ productState:
 transformation:
   - alias: Test_input_port_trans
     description: step_1
-    type: SQL
+    type: sql
     sequenceNo: '1'
     query: SELECT * FROM Test_input_port
     references:
