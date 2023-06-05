@@ -40,6 +40,7 @@ inputPorts:
 productState:
   refreshInterval: "*/10 * * * *"
   updateStrategy: append
+  updateSchedule: 'test'
   logicalSchema:
     properties:
       id:
