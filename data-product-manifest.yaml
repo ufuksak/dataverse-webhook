@@ -52,7 +52,7 @@ productState:
       modified:
         type: datetime
 transformation:
-  - alias: Test_input_port_trans
+  - alias: Test_input_port_trans1
     description: step_1
     type: sql
     sequenceNo: 1
