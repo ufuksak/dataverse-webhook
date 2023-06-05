@@ -54,7 +54,7 @@ transformation:
   - alias: Test_input_port_trans
     description: step_1
     type: sql
-    sequenceNo: '1'
+    sequenceNo: 1
     query: SELECT * FROM Test_input_port
     references:
       - alias: Test_input_port
