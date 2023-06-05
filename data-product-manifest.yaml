@@ -26,7 +26,7 @@ inputPorts:
     type: s3-parquet
     tags: []
     syncType: pull
-    dataSetUrn: urn:dv:dataset:2a9cab3a-6057-4f87-9de6-437bc6d465bb
+    dataSetUrn: urn:dv:dataset:3fbe5ee2-0ee3-431b-904e-3545f01a5703
     incrementalLoad: true
     incrementalStrategy:
       frequency:
