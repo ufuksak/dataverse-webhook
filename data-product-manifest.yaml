@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Test_kk_maf12345
+alias: Test_kk_maf123456
 discoveryPort:
-  name: Test_kk_maf12345
+  name: Test_kk_maf123456
   alias: Test_kk_maf
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
@@ -22,7 +22,7 @@ inputPorts:
     type: s3-parquet
     tags: []
     syncType: pull
-    dataSetUrn: urn:dv:dataset:3fbe5ee2-0ee3-431b-904e-3545f01a5703
+    dataSetUrn: urn:dv:dataset:7dc8f13d-104a-4cc7-a8a2-00c5135d62ec
     incrementalLoad: true
     incrementalStrategy:
       frequency:
