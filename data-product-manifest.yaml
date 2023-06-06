@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Test_kk_maf123451
+alias: Test_kk_maf1234512
 discoveryPort:
-  name: Test_kk_maf123451
+  name: Test_kk_maf1234512
   alias: Test_kk_maf
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
@@ -56,7 +56,11 @@ transformation:
     description: step_1
     type: sql
     sequenceNo: 1
+    stepName: one
     query: SELECT * FROM Test_input_port
+    inputDataFrameList:
+      - inputDataFrame: test
+        tempViewName: test
     references:
       - alias: Test_input_port
         sqlReference: Test_input_port        
