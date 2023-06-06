@@ -58,6 +58,8 @@ transformation:
     sequenceNo: 1
     stepName: one
     query: SELECT * FROM Test_input_port
+    optional: 
+      persistDataFrame: true
     inputDataFrameList:
       - inputDataFrame: test
         tempViewName: test
