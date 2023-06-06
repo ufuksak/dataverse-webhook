@@ -56,7 +56,11 @@ transformation:
     description: step_1
     type: sql
     sequenceNo: 1
+    stepName: one
     query: SELECT * FROM Test_input_port
+    inputDataFrameList:
+      - inputDataFrame: test
+        tempViewName: test
     references:
       - alias: Test_input_port
         sqlReference: Test_input_port        
