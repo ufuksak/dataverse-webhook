@@ -4,7 +4,6 @@ alias: Test_kk_maf1234512345678
 discoveryPort:
   name: Test_kk_maf1234512345678
   alias: Test_kk_maf
-  shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
     - MAF Data
@@ -68,7 +67,7 @@ transformation:
         sqlReference: Test_input_port        
 outputPort:
   subscriptionChannels:
-    - channelType: jdbc
+    - channelType: JDBC
       queryType: SQL
 controlPort:
   dataQualityCheck:
