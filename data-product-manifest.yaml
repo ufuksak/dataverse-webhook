@@ -10,8 +10,7 @@ discoveryPort:
     - MAF Data
     - Schedule Run
   industryDomain: Meteorology
-  function: 
-    - Forecast
+  function: Forecast
   regulatoryFields:
     dataPrivacy: public
     customerInfo: nonPII
