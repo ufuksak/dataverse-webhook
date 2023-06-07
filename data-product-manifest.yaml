@@ -69,8 +69,8 @@ transformation:
         sqlReference: Test_input_port        
 outputPort:
   subscriptionChannels:
-    - channelType: jdbc
-      queryType: sql
+    - channelType: JDBC
+      queryType: SQL
 controlPort:
   dataQualityCheck:
     RecordCountCheck:
