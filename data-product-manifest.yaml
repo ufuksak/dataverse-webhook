@@ -22,7 +22,7 @@ inputPorts:
     type: s3-parquet
     tags: []
     syncType: pull
-    connectionUrn: urn:dv:connectionq:db50f733-86e0-41e8-9ec3-282457e65761
+    connectionUrn: urn:dv:connection:a7931296-47e6-43e6-9554-5051ad12d6d7
     incrementalLoad: true
     incrementalStrategy:
       frequency:
@@ -68,7 +68,7 @@ transformation:
         sqlReference: Test_input_port        
 outputPort:
   subscriptionChannels:
-    - channelType: JDBC
+    - channelType: jdbc
       queryType: SQL
 controlPort:
   dataQualityCheck:
