@@ -69,7 +69,7 @@ transformation:
 outputPort:
   subscriptionChannels:
     - channelType: jdbc
-      queryType: SQL
+      queryType: sql
 controlPort:
   dataQualityCheck:
     RecordCountCheck:
