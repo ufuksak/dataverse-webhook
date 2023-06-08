@@ -10,7 +10,8 @@ discoveryPort:
     - MAF Data
     - Schedule Run
   industryDomain: Meteorology
-  function: Forecast
+  function: 
+    - Forecast
   regulatoryFields:
     dataPrivacy: public
     customerInfo: nonPII
@@ -66,8 +67,8 @@ transformation:
         sqlReference: Test_input_port        
 outputPort:
   subscriptionChannels:
-    - channelType: JDBC
-      queryType: SQL
+    - channelType: jdbc
+      queryType: sql
 controlPort:
   dataQualityCheck:
     RecordCountCheck:
