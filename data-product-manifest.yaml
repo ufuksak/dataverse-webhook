@@ -30,7 +30,7 @@ inputPorts:
         - keyReference: timeStamp
           mode: range
           interval: -5
-    entity:
+    dataSet:
       path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       variables:
         - key: timeStamp
