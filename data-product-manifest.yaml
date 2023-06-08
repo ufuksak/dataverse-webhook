@@ -40,9 +40,9 @@ inputPorts:
         delimiter: ','
         header: true
 productState:
-  refreshInterval: "*/5 * * * *"
+  updateSchedule: "*/5 * * * *"
   updateStrategy: append
-  updateSchedule: 'test'
+  updateType: scheduled
   logicalSchema:
     properties:
       id:
