@@ -70,7 +70,7 @@ outputPort:
     - channelType: jdbc
       queryType: sql
 controlPort:
-  dataQualityCheck:
+  dataQualityRules:
     RecordCountCheck:
       inputPort:
         - referenceAlias: Test_input_port
