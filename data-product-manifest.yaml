@@ -9,7 +9,8 @@ discoveryPort:
   tags:
     - MAF Data
     - Schedule Run
-  industryDomain: Meteorology
+  domain: 
+    - Meteorology
   function: 
     - Forecast
   regulatoryFields:
