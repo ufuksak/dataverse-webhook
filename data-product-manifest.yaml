@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Basic_manifest_file_12_June_Test_512345
+alias: Basic_manifest_file_12_June_Test_5123456
 discoveryPort:
-  name: Basic_manifest_sandbox_12_June_Test612345
+  name: Basic_manifest_sandbox_12_June_Test6123456
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
