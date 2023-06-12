@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Basic_manifest_file_12_June_Test_5123456
+alias: Sample59434_9June_ufuk
 discoveryPort:
-  name: Basic_manifest_sandbox_12_June_Test6123456
+  name: Validation457_9June_ufuk
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
@@ -21,15 +21,15 @@ inputPorts:
     type: s3-csv
     tags: []
     syncType: pull
-    connectionUrn: urn:dv:connection:ea19af77-4691-4eb0-92ff-d8f2b8dd278d
+    connectionUrn: urn:dv:connection:e6256cc3-386f-4a45-8c6e-5c32ea4287ca
     dataSet:
-      path: s3://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
+      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       advanceOptions:
         delimiter: ','
         header: true
 productState:
   updateType: 'scheduled'
-  updateSchedule: "*/10 * * * *"
+  updateSchedule: "*/5 * * * *"
   updateStrategy: append
   logicalSchema:
     properties:
@@ -57,8 +57,6 @@ transformation:
 outputPort:
   subscriptionChannels:
     - channelType: jdbc
-      queryType: sql
-    - channelType: rest-api
       queryType: sql
 controlPort:
   dataQualityRules:
