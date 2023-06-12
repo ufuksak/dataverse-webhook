@@ -1,74 +1,149 @@
 ---
-version: 0.0.1
+version: 0.1.0
+alias: Basic_manifest_file_12_June_Test_512
 discoveryPort:
-  name: Preprod Car prices barcelona - 2 min
-  description: Average car price in barcelona
-  category: customer
-  image: http://google.com
-  autofillUserinfo: true
-  tags: []
-  extra: {}
+  name: Basic_manifest_sandbox_12_June_Test612
+  shortDescription: Weather Forecast of the next 7 days for ahmedabad city
+  longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
+  tags:
+    - MAF Data
+    - Schedule Run
+  domain: ['Finance']
+  function: ['Forecast']
+  regulatoryFields:
+    dataPrivacy: public
+    customerInfo: nonPII
+    dataOrigin: machineGenerated
+    monetaryInfo: nonFinancialData
 inputPorts:
-  - alias: car_input_port
+  - alias: Test_input_port
     description: string
+    type: s3-csv
     tags: []
-    extra: {}
     syncType: pull
-    type: s3
-    sourceUrn: urn:dv:datasource:5956e9cc-6e2e-4882-a976-5de0a81de6fa
-    entityId:
-      alias: car_prices
-      createEntity: true
-      type: s3-bucket
-      entityPath: s3a://dp-input-bucket/property_rental/houses_Madrid.parquet
-      entityFilterPatternMatch: "*"
-      sourceSchemaUrn: urn:dv:schema:9d4716d4
-      projectSchemaUrn: urn:dv:schema:9d4716d6
-      fileFormat: parquet
-      delimiter: ","
-      header: true
-      filter: brand = 'BMW'
-      processingTimeColumn:
-        - processing_time
-      actualTimeColumn:
-        - processing_time
-      projection:
-        - brand
-        - model
-        - engine
-        - year
-        - location
-stateManagement:
-  alias: car_prices_barcelona
-  refreshInterval: "*/2 * * * *"
-  updateStrategy: SCD2
-  productStoreState:
-    logicalSchema:
-      properties:
-        brand:
-          type: string
-        model:
-          type: string
-        engine:
-          type: string
-        year:
-          type: string
-        location:
-          type: string
-    retentionVersions: "10"
-  updateStrategyOptions:
-    entityRef: ${urn:dv:datasource:6d4714c3}:1
-    processingTimeColumn:
-      - "123456"
-    actualTimeColumn:
-      - "123456"
-    uniqueKeyColumns:
-      - customer_id
-    changeTrackColumns:
-      - cust_title_desc
-      - cust_birthday
-      - cust_nationality
-    tags:
-      - test
+    connectionUrn: urn:dv:connection:5956e9cc-6e2e-4882-a976-5de0a81de6fa
+    dataSet:
+      path: s3://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
+      advanceOptions:
+        delimiter: ','
+        header: true
+productState:
+  updateType: 'scheduled'
+  updateSchedule: "*/10 * * * *"
+  updateStrategy: append
+  logicalSchema:
+    properties:
+      id:
+        type: number
+      name:
+        type: String
+      marks:
+        type: number
+      modified:
+        type: datetime
 transformation:
-  sql: select * from car_prices
+  - alias: Test_input_port_trans1
+    description: step_1
+    type: sql
+    sequenceNo: 1
+    stepName: one
+    query: SELECT * FROM Test_input_port
+    inputDataFrameList:
+      - inputDataFrame: test
+        tempViewName: test
+    references:
+      - alias: Test_input_port
+        sqlReference: Test_input_port        
+outputPort:
+  subscriptionChannels:
+    - channelType: jdbc
+      queryType: sql
+    - channelType: rest-api
+      queryType: sql
+controlPort:
+  dataQualityRules:
+    RecordCountCheck:
+      inputPort:
+        - referenceAlias: Test_input_port
+          expression: ">="
+          number: 100
+      productState:
+        referenceAlias: Test0001_input_port
+        expression: ==
+        number: 100
+    NullValueCheck:
+      inputPort:
+        - referenceAlias: Test_input_port
+          checks:
+            - column: amount
+              expression: ">="
+              number: 9
+            - column: payment_option
+              expression: ">="
+              number: 8
+      productState:
+        referenceAlias: Test0001_input_port
+        checks:
+          - column: amount
+            expression: ">="
+            number: 0.9
+    NullCombinationCheck:
+      productState:
+        referenceAlias: Test0001_input_port
+        checks:
+          - columns:
+              - transaction_reference
+              - order_reference
+            expression: ">="
+            number: 0.99
+    UnacceptableTextValueCheck:
+      inputPort:
+        - referenceAlias: Test_input_port
+          checks:
+            - column: payment_option
+              valueList:
+                - VISA
+                - MASTERCARD
+              number: 0.95
+              expression: ">="
+      productState:
+        referenceAlias: Test0001_input_port
+        checks:
+          - column: payment_option
+            valueList:
+              - MASTERCARD
+              - VISA
+            number: 0.9
+            expression: ">="
+    UniquenessCheck:
+      inputPort:
+        - referenceAlias: Test_input_port
+          checks:
+            - column: store_group_name
+            - column: store_name
+    UniqueCombinationCheck:
+      inputPort:
+        - referenceAlias: Test_input_port
+          checks:
+            - columns:
+                - store_name
+                - transaction_Reference
+      productState:
+        referenceAlias: Test0001_input_port
+        checks:
+          - columns:
+              - store_name
+              - transaction_Reference
+    DistinctValueCountCheck:
+      inputPort:
+        - referenceAlias: Test_input_port
+          checks:
+            - column: payment_option
+              number: 2
+              expression: "<="
+      productState:
+        referenceAlias: Test0001_input_port
+        checks:
+          - column: payment_option
+            number: 2
+            expression: "<="
