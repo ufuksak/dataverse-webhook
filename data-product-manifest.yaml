@@ -1,18 +1,15 @@
 ---
 version: 0.1.0
-alias: Test_kk_maf123456789123456789
+alias: Basic_manifest_file_12_June_Test_51
 discoveryPort:
-  name: Test_kk_maf123456789123456789
-  alias: Test_kk_maf
+  name: Basic_manifest_sandbox_12_June_Test61
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
     - MAF Data
     - Schedule Run
-  domain: 
-    - Meteorology
-  function: 
-    - Forecast
+  domain: ['Finance']
+  function: ['Forecast']
   regulatoryFields:
     dataPrivacy: public
     customerInfo: nonPII
@@ -21,28 +18,19 @@ discoveryPort:
 inputPorts:
   - alias: Test_input_port
     description: string
-    type: s3-parquet
+    type: s3-csv
     tags: []
     syncType: pull
-    dataSetUrn: urn:dv:dataset:ea19af77-4691-4eb0-92ff-d8f2b8dd278d
-    incrementalLoad: true
-    incrementalStrategy:
-      frequency:
-        - keyReference: timeStamp
-          mode: range
-          interval: -5
+    connectionUrn: urn:dv:connection:ea19af77-4691-4eb0-92ff-d8f2b8dd278d
     dataSet:
-      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
-      variables:
-        - key: timeStamp
-          value: date-YYYYMMdd
+      path: s3://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
       advanceOptions:
         delimiter: ','
         header: true
 productState:
-  updateSchedule: "*/5 * * * *"
+  updateType: 'scheduled'
+  updateSchedule: "*/10 * * * *"
   updateStrategy: append
-  updateType: scheduled
   logicalSchema:
     properties:
       id:
@@ -69,6 +57,8 @@ transformation:
 outputPort:
   subscriptionChannels:
     - channelType: jdbc
+      queryType: sql
+    - channelType: rest-api
       queryType: sql
 controlPort:
   dataQualityRules:
