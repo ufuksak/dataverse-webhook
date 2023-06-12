@@ -21,7 +21,7 @@ inputPorts:
     type: s3-csv
     tags: []
     syncType: pull
-    connectionUrn: urn:dv:connection:5956e9cc-6e2e-4882-a976-5de0a81de6fa
+    connectionUrn: urn:dv:connection:42d7b69e-0d94-468b-acef-5b509cdb84e6
     dataSet:
       path: s3://dataverse-byte/sample-data/inputData/demo/demo_update2.csv
       advanceOptions:
