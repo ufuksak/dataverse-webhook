@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: ufuk_TestMultiTransform_June_14_12
+alias: ufuk_TestMultiTransform_June_14_123
 discoveryPort:
-  name: Ufuk MultiTransformation Scenario 14 June Test 23
+  name: Ufuk MultiTransformation Scenario 14 June Test 234
   shortDescription: Test search functionality
   longDescription: search maximum characters for long description
   tags:
