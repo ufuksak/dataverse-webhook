@@ -1,13 +1,13 @@
 ---
 version: 0.1.0
-alias: Sample59434_9June_ufuk2
+alias: ufuk_TestMultiTransform_June_14_1
 discoveryPort:
-  name: Validation457_9June_ufuk2
-  shortDescription: Weather Forecast of the next 7 days for ahmedabad city
-  longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
+  name: Ufuk MultiTransformation Scenario 14 June Test 2
+  shortDescription: Test search functionality
+  longDescription: search maximum characters for long description
   tags:
-    - MAF Data
-    - Schedule Run
+    - Dataverse
+    - Finance
   domain: ['Finance']
   function: ['Forecast']
   regulatoryFields:
@@ -16,132 +16,69 @@ discoveryPort:
     dataOrigin: machineGenerated
     monetaryInfo: nonFinancialData
 inputPorts:
-  - alias: Test_input_port
+  - alias: car_input_port
     description: string
-    type: s3-csv
     tags: []
+    extra: {}
     syncType: pull
+    type: s3-parquet
     connectionUrn: urn:dv:connection:e6256cc3-386f-4a45-8c6e-5c32ea4287ca
     dataSet:
-      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
-      advanceOptions:
-        delimiter: ','
-        header: true
+      path: "s3a://dp-input-bucket/user_car_prices_barcelona_2022/"
+      filter: brand = 'BMW'
+      projection:
+        - brand
+        - model
+        - engine
+        - year
+        - location
 productState:
   updateType: 'scheduled'
-  updateSchedule: "*/5 * * * *"
+  updateSchedule: "*/03 * * * *"
   updateStrategy: append
   logicalSchema:
     properties:
-      id:
-        type: number
-      name:
-        type: String
-      marks:
-        type: number
-      modified:
-        type: datetime
+      brand:
+        type: string
+      model:
+        type: string
+      engine:
+        type: string
+      year:
+        type: string
+      location:
+        type: string
 transformation:
-  - alias: Test_input_port_trans1
-    description: step_1
-    type: sql
-    sequenceNo: 1
-    stepName: one
-    query: SELECT * FROM Test_input_port
-    inputDataFrameList:
-      - inputDataFrame: test
-        tempViewName: test
-    references:
-      - alias: Test_input_port
-        sqlReference: Test_input_port        
+    - alias: "car_price_step_1"
+      description: "step_1"
+      type: sql
+      sequenceNo: 1
+      stepName: one
+      query: "SELECT * FROM car_input_port"
+      references:
+        - alias: 'car_input_port'
+          sqlReference: 'car_input_port'
+    - alias: "car_price_step_2"
+      description: "step_2"
+      query: "SELECT * FROM car_price_step_1"
+      type: sql
+      sequenceNo: 1
+      stepName: one
+      references:
+        - alias: 'car_price_step_1'
+          sqlReference: 'car_price_step_1'
 outputPort:
   subscriptionChannels:
-    - channelType: jdbc
+    - channelType: rest-api
       queryType: sql
 controlPort:
   dataQualityRules:
     RecordCountCheck:
       inputPort:
-        - referenceAlias: Test_input_port
+        - referenceAlias: car_input_port
           expression: ">="
           number: 100
       productState:
-        referenceAlias: Test0001_input_port
+        referenceAlias: car_input_port_001
         expression: ==
         number: 100
-    NullValueCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: amount
-              expression: ">="
-              number: 9
-            - column: payment_option
-              expression: ">="
-              number: 8
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: amount
-            expression: ">="
-            number: 0.9
-    NullCombinationCheck:
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - columns:
-              - transaction_reference
-              - order_reference
-            expression: ">="
-            number: 0.99
-    UnacceptableTextValueCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: payment_option
-              valueList:
-                - VISA
-                - MASTERCARD
-              number: 0.95
-              expression: ">="
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: payment_option
-            valueList:
-              - MASTERCARD
-              - VISA
-            number: 0.9
-            expression: ">="
-    UniquenessCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: store_group_name
-            - column: store_name
-    UniqueCombinationCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - columns:
-                - store_name
-                - transaction_Reference
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - columns:
-              - store_name
-              - transaction_Reference
-    DistinctValueCountCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: payment_option
-              number: 2
-              expression: "<="
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: payment_option
-            number: 2
-            expression: "<="
