@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: SCD2_testing_manifest_changes_Test_15_June_Test17
+alias: SCD2_testing_manifest_changes_Test_15_June_Test18
 discoveryPort:
-  name: SCD2 changes implementation Verification 15 June Test 1 for CSV7
+  name: SCD2 changes implementation Verification 15 June Test 1 for CSV8
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
