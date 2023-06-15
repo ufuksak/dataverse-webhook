@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: ufuk_June_15_1
+alias: ufuk_June_15_12
 discoveryPort:
-  name: Ufuk 15 June Test 234
+  name: Ufuk 15 June Test 2342
   shortDescription: Test search functionality
   longDescription: search maximum characters for long description
   tags:
