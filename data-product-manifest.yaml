@@ -1,6 +1,6 @@
 ---
 version: 0.1.0
-alias: all_dq_check_warnings
+alias: Test0001_input_port
 discoveryPort:
   name: all dq checks warnings
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
