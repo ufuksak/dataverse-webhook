@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: all_dq_check_warnings2
+alias: all_dq_check_warnings
 discoveryPort:
-  name: all dq checks warnings2
+  name: all dq checks warnings
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
@@ -21,7 +21,7 @@ inputPorts:
     type: s3-csv
     tags: []
     syncType: pull
-    connectionUrn: urn:dv:connection:00f04b95-7c1d-4cde-aed2-1d3b9f921053
+    connectionUrn: urn:dv:connection:9fd86a41-6a34-4073-a508-337dccb711f1
     dataSet:
       path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       advanceOptions:
