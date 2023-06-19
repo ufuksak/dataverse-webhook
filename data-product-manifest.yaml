@@ -59,6 +59,23 @@ outputPort:
   subscriptionChannels:
     - channelType: jdbc
       queryType: sql
+# After the state updates happen push the data to all the channels
+  updateChannels:
+    - type: postgres-table
+      syncType: push
+      connectionUrn: urn:dv:connection:e6256cc3-386f-4a45-8c6e-5c32ea4287ca # a postgres connection
+      dataSet:
+        tableName: test_data_table
+    - type: vertica-table
+      syncType: push
+      connectionUrn: urn:dv:connection:e6256cc3-386f-4a45-8c6e-5c32ea4287ca # a postgres connection
+      dataSet:
+        tableName: test_data_table
+    - type: s3-csv
+      syncType: push
+      connectionUrn: urn:dv:connection:e6256cc3-386f-4a45-8c6e-5c32ea4287ca # a postgres connection
+      dataSet:
+        path: s3://dataverse-byte/sample-data/outputdata/
 controlPort:
   dataQualityRules:
     RecordCountCheck:
