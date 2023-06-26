@@ -23,10 +23,7 @@ inputPorts:
     syncType: pull
     connectionUrn: urn:dv:connection:f735e05d-b630-4e81-9cbc-c5af4d5c08b0
     dataSet:
-      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
-      advanceOptions:
-        delimiter: ','
-        header: true
+      tableName: spark_etl_library_test_columnstore
 productState:
   alias: Test0001_input_port
   updateType: 'scheduled'
