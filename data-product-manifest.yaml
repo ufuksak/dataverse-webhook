@@ -72,7 +72,7 @@ outputPort:
         tableName: test_data_table
     - type: s3-csv
       syncType: push
-      connectionUrn: urn:dv:connection:f16ecf2a-e876-4e9b-9809-bf2314417eb4
+      connectionUrn: urn:dv:connection:d277aa22-c3d0-40bc-8816-79f2daabc0f8
       dataSet:
         path: s3://dataverse-byte/sample-data/outputdata/
 controlPort:
