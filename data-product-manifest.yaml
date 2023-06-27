@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: 1Test0001_input_port123
+alias: 1Test0001_input_port1234
 discoveryPort:
-  name: 1all dq checks warnings2123
+  name: 1all dq checks warnings21234
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
@@ -27,7 +27,7 @@ inputPorts:
 productState:
   alias: Test0001_input_port
   updateType: 'scheduled'
-  updateSchedule: "*/10 * * * *"
+  updateSchedule: "*/3 * * * *"
   updateStrategy: append
   logicalSchema:
     properties:
