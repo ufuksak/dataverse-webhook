@@ -21,7 +21,7 @@ inputPorts:
     type: vertica-table
     tags: []
     syncType: pull
-    connectionUrn: urn:dv:connection:bf5459be-f283-4dd1-8c08-23777a839bb4
+    connectionUrn: urn:dv:connection:0b18c8d2-a6d1-4212-a3d4-33cfd776d905
     dataSet:
       tableName: spark_etl_library_test_columnstore
 productState:
@@ -60,19 +60,19 @@ outputPort:
   updateChannels:
     - type: postgres-table
       syncType: push
-      connectionUrn: urn:dv:connection:ff0fff23-d477-4c04-9ea6-089cc008b330 # a postgres connection
+      connectionUrn: urn:dv:connection:90047c32-df5a-4626-acae-6e29f3c52b97
       dataSet:
         path: s3://dataverse-byte/sample-data/outputdata/
         tableName: test_data_table
     - type: vertica-table
       syncType: push
-      connectionUrn: urn:dv:connection:bf5459be-f283-4dd1-8c08-23777a839bb4 # a postgres connection
+      connectionUrn: urn:dv:connection:0b18c8d2-a6d1-4212-a3d4-33cfd776d905
       dataSet:
         path: s3://dataverse-byte/sample-data/outputdata/
         tableName: test_data_table
     - type: s3-csv
       syncType: push
-      connectionUrn: urn:dv:connection:37dc3826-d295-4b8b-b944-4e57e2422c54 # a postgres connection
+      connectionUrn: urn:dv:connection:f16ecf2a-e876-4e9b-9809-bf2314417eb4
       dataSet:
         path: s3://dataverse-byte/sample-data/outputdata/
 controlPort:
