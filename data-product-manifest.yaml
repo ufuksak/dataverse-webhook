@@ -62,13 +62,13 @@ outputPort:
       syncType: push
       connectionUrn: urn:dv:connection:0b18c8d2-a6d1-4212-a3d4-33cfd776d905
       dataSet:
-        path: s3://dataverse-byte/sample-data/outputdata/
+        path: s3://dataverse-byte/sample-data/outputdata
         tableName: test_data_table
     - type: s3-csv
       syncType: push
       connectionUrn: urn:dv:connection:d277aa22-c3d0-40bc-8816-79f2daabc0f8
       dataSet:
-        path: s3://dataverse-byte/sample-data/outputdata/
+        path: s3://dataverse-byte/sample-data/outputdata
 controlPort:
   dataQualityRules:
     RecordCountCheck:
