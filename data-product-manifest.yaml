@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: 1Test0001_input_port1234567891234560012
+alias: 1Test0001_input_port12345678912345600123
 discoveryPort:
-  name: 1all dq checks warnings21234567891234560012
+  name: 1all dq checks warnings212345678912345600123
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
@@ -71,4 +71,4 @@ outputPort:
       syncType: push
       connectionUrn: urn:dv:connection:d277aa22-c3d0-40bc-8816-79f2daabc0f8
       dataSet:
-        path: s3://dataverse-byte/sample-data/inputData/test_scd_anokhi.csv
+        path: s3://dataverse-byte/sample-data/inputData/file1.csv
