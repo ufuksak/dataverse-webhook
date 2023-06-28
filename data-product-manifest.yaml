@@ -83,8 +83,3 @@ outputPort:
       dataSet:
         path: s3://dataverse-byte/sample-data/inputData/sample4.parquet
         tableName: test_data_table
-    - type: s3-parquet
-      syncType: push
-      connectionUrn: urn:dv:connection:d277aa22-c3d0-40bc-8816-79f2daabc0f8
-      dataSet:
-        path: s3://dataverse-byte/sample-data/inputData/sample3.parquet
