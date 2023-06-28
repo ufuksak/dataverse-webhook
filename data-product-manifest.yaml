@@ -65,4 +65,3 @@ outputPort:
       connectionUrn: urn:dv:connection:0b18c8d2-a6d1-4212-a3d4-33cfd776d905
       dataSet:
         path: s3://dataverse-byte/sample-data/inputData/sample4.parquet
-        tableName: test_data_table
