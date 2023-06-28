@@ -59,7 +59,6 @@ outputPort:
   subscriptionChannels:
     - channelType: jdbc
       queryType: sql
-# After the state updates happen push the data to all the channels
   updateChannels:
     - type: postgres-table
       syncType: push
