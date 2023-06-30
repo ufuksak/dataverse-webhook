@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Test0001_input_port123
+alias: Test0001_input_port1234
 discoveryPort:
-  name: Test all dq checks warnings
+  name: Test all dq checks warnings 120
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
@@ -91,7 +91,7 @@ controlPort:
           expression: ">="
           number: 100
       productState:
-        referenceAlias: Test0001_input_port123
+        referenceAlias: Test0001_input_port1234
         expression: ==
         number: 100
     NullValueCheck:
@@ -105,14 +105,14 @@ controlPort:
               expression: ">="
               number: 8
       productState:
-        referenceAlias: Test0001_input_port123
+        referenceAlias: Test0001_input_port1234
         checks:
           - column: amount
             expression: ">="
             number: 0.9
     NullCombinationCheck:
       productState:
-        referenceAlias: Test0001_input_port123
+        referenceAlias: Test0001_input_port1234
         checks:
           - columns:
               - transaction_reference
@@ -130,7 +130,7 @@ controlPort:
               number: 0.95
               expression: ">="
       productState:
-        referenceAlias: Test0001_input_port123
+        referenceAlias: Test0001_input_port1234
         checks:
           - column: payment_option
             valueList:
@@ -152,7 +152,7 @@ controlPort:
                 - store_name
                 - transaction_Reference
       productState:
-        referenceAlias: Test0001_input_port123
+        referenceAlias: Test0001_input_port1234
         checks:
           - columns:
               - store_name
@@ -165,7 +165,7 @@ controlPort:
               number: 2
               expression: "<="
       productState:
-        referenceAlias: Test0001_input_port123
+        referenceAlias: Test0001_input_port1234
         checks:
           - column: payment_option
             number: 2
