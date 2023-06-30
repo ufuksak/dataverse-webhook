@@ -16,7 +16,7 @@ discoveryPort:
     dataOrigin: machineGenerated
     monetaryInfo: nonFinancialData
 inputPorts:
-  - alias: Test_input_port2
+  - alias: Test_input_port290
     description: string2
     type: s3-csv
     tags: []
@@ -87,7 +87,7 @@ controlPort:
   dataQualityRules:
     RecordCountCheck:
       inputPort:
-        - referenceAlias: Test0001_input_port123
+        - referenceAlias: Test_input_port290
           expression: ">="
           number: 100
       productState:
@@ -96,7 +96,7 @@ controlPort:
         number: 100
     NullValueCheck:
       inputPort:
-        - referenceAlias: Test0001_input_port123
+        - referenceAlias: Test_input_port290
           checks:
             - column: amount
               expression: ">="
@@ -121,7 +121,7 @@ controlPort:
             number: 0.99
     UnacceptableTextValueCheck:
       inputPort:
-        - referenceAlias: Test0001_input_port123
+        - referenceAlias: Test_input_port290
           checks:
             - column: payment_option
               valueList:
@@ -140,13 +140,13 @@ controlPort:
             expression: ">="
     UniquenessCheck:
       inputPort:
-        - referenceAlias: Test0001_input_port123
+        - referenceAlias: Test_input_port290
           checks:
             - column: store_group_name
             - column: store_name
     UniqueCombinationCheck:
       inputPort:
-        - referenceAlias: Test0001_input_port123
+        - referenceAlias: Test_input_port290
           checks:
             - columns:
                 - store_name
@@ -159,7 +159,7 @@ controlPort:
               - transaction_Reference
     DistinctValueCountCheck:
       inputPort:
-        - referenceAlias: Test0001_input_port123
+        - referenceAlias: Test_input_port290
           checks:
             - column: payment_option
               number: 2
