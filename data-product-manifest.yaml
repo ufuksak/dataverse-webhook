@@ -56,23 +56,29 @@ outputPort:
   subscriptionChannels:
     - channelType: jdbc
       queryType: sql
-# After the state updates happen push the data to all the channels
   updateChannels:
     - type: postgres-table
       syncType: push
-      connectionUrn: urn:dv:connection:e6256cc3-386f-4a45-8c6e-5c32ea4287ca # a postgres connection
+      connectionUrn: urn:dv:connection:975e48c9-f7bf-4ee0-b5a5-a53f3e2e7b45
       dataSet:
-        tableName: test_data_table
+        tableName: details
+        path: s3://dataverse-byte/sample-data/inputData/sample2.parquet
     - type: vertica-table
       syncType: push
-      connectionUrn: urn:dv:connection:e6256cc3-386f-4a45-8c6e-5c32ea4287ca # a postgres connection
+      connectionUrn: urn:dv:connection:0b18c8d2-a6d1-4212-a3d4-33cfd776d905
       dataSet:
+        path: s3://dataverse-byte/sample-data/inputData/sample4.parquet
         tableName: test_data_table
     - type: s3-csv
       syncType: push
-      connectionUrn: urn:dv:connection:e6256cc3-386f-4a45-8c6e-5c32ea4287ca # a postgres connection
+      connectionUrn: urn:dv:connection:d277aa22-c3d0-40bc-8816-79f2daabc0f8
       dataSet:
-        path: s3://dataverse-byte/sample-data/outputdata/
+        path: s3://dataverse-byte/sample-data/inputData/file1.csv
+    - type: s3-parquet
+      syncType: push
+      connectionUrn: urn:dv:connection:d277aa22-c3d0-40bc-8816-79f2daabc0f8
+      dataSet:
+        path: s3://dataverse-byte/sample-data/inputData/sample3.parquet
 controlPort:
   dataQualityRules:
     RecordCountCheck:
