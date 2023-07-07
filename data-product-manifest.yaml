@@ -24,7 +24,6 @@ inputPorts:
     dataSet:
       tableName: details
 productState:
-  alias: Test0001_input_port
   updateType: 'scheduled'
   updateSchedule: "*/2 * * * *"
   updateStrategy: append
