@@ -20,7 +20,7 @@ inputPorts:
     description: string
     type: postgres-table
     syncType: pull
-    connectionUrn: urn:dv:connection:975e48c9-f7bf-4ee0-b5a5-a53f3e2e7b45
+    connectionUrn: urn:dv:connection:4f0c5ef9-474a-4244-a2fa-33c51d8564e7
     dataSet:
       tableName: details
 productState:
