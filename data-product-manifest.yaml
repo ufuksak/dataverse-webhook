@@ -21,7 +21,7 @@ inputPorts:
     type: vertica-table
     tags: []
     syncType: pull
-    connectionUrn: urn:dv:connection:4f08e0d3-cd02-4054-924a-9238bd3b9c85
+    connectionUrn: urn:dv:connection:4f0c5ef9-474a-4244-a2fa-33c51d8564e7
     dataSet:
       tableName: spark_etl_library_test_columnstore
 productState:
