@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Test0001_input_port12345678
+alias: Test0001_input_port123456789
 discoveryPort:
-  name: Test all dq checks warnings 1201678
+  name: Test all dq checks warnings 12016789
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
@@ -20,7 +20,7 @@ inputPorts:
     description: string
     type: postgres-table
     syncType: pull
-    connectionUrn: urn:dv:connection:4f0c5ef9-474a-4244-a2fa-33c51d8564e7
+    connectionUrn: urn:dv:connection:975e48c9-f7bf-4ee0-b5a5-a53f3e2e7b45
     dataSet:
       tableName: details
 productState:
