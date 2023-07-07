@@ -1,20 +1,15 @@
 ---
 version: 0.1.0
-alias: Test_kk_maf234567
+alias: Test0001_input_port1234567
 discoveryPort:
-  name: Test_kk_maf234567
-  alias: Test_kk_maf
+  name: Test all dq checks warnings 120167
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
     - MAF Data
     - Schedule Run
-  dataTimeRange:
-    fromMinDataDate: '2022-04-07'
-    toMinDataDate: '2022-04-14'
-    timeColumn: '2022-04-07'
-  industryDomain: Meteorology
-  function: Forecast
+  domain: ['Finance']
+  function: ['Forecast']
   regulatoryFields:
     dataPrivacy: public
     customerInfo: nonPII
@@ -23,134 +18,35 @@ discoveryPort:
 inputPorts:
   - alias: Test_input_port
     description: string
-    type: s3-parquet
-    tags: []
+    type: postgres-table
     syncType: pull
-    dataSetUrn: urn:dv:dataset:7dc8f13d-104a-4cc7-a8a2-00c5135d62ec
-    incrementalLoad: true
-    incrementalStrategy:
-      frequency:
-        - keyReference: timeStamp
-          mode: range
-          interval: -5
-    entity:
-      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
-      variables:
-        - key: timeStamp
-          value: date-YYYYMMdd
-      advanceOptions:
-        delimiter: ','
-        header: 'true'
+    connectionUrn: urn:dv:connection:975e48c9-f7bf-4ee0-b5a5-a53f3e2e7b45
+    dataSet:
+      tableName: details
 productState:
-  refreshInterval: "*/10 * * * *"
+  updateType: 'scheduled'
+  updateSchedule: "*/2 * * * *"
   updateStrategy: append
   logicalSchema:
     properties:
-      id:
-        type: number
-      name:
-        type: String
-      marks:
-        type: number
-      modified:
-        type: datetime
+      MT_MTRSCD:
+        type: string
+      WRITEOFF_WAREHOUSE:
+        type: string
 transformation:
-  - alias: Test_input_port_trans
+  - alias: Test_input_port_trans1
     description: step_1
-    type: SQL
-    sequenceNo: '1'
-    query: SELECT * FROM Test_input_port
-    references:
-      - alias: Test_input_port
-        sqlReference: Test_input_port        
+    type: sql
+    sequenceNo: 1
+    query: SELECT MT_MTRSCD,WRITEOFF_WAREHOUSE FROM Test_input_port
 outputPort:
   subscriptionChannels:
-    - channelType: JDBC
-      queryType: SQL
-controlPort:
-  dataQualityCheck:
-    RecordCountCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          expression: ">="
-          number: 100
-      productState:
-        referenceAlias: Test0001_input_port
-        expression: ==
-        number: 100
-    NullValueCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: amount
-              expression: ">="
-              number: 9
-            - column: payment_option
-              expression: ">="
-              number: 8
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: amount
-            expression: ">="
-            number: 0.9
-    NullCombinationCheck:
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - columns:
-              - transaction_reference
-              - order_reference
-            expression: ">="
-            number: 0.99
-    UnacceptableTextValueCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: payment_option
-              valueList:
-                - VISA
-                - MASTERCARD
-              number: 0.95
-              expression: ">="
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: payment_option
-            valueList:
-              - MASTERCARD
-              - VISA
-            number: 0.9
-            expression: ">="
-    UniquenessCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: store_group_name
-            - column: store_name
-    UniqueCombinationCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - columns:
-                - store_name
-                - transaction_Reference
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - columns:
-              - store_name
-              - transaction_Reference
-    DistinctValueCountCheck:
-      inputPort:
-        - referenceAlias: Test_input_port
-          checks:
-            - column: payment_option
-              number: 2
-              expression: "<="
-      productState:
-        referenceAlias: Test0001_input_port
-        checks:
-          - column: payment_option
-            number: 2
-            expression: "<="
+    - channelType: jdbc
+      queryType: sql
+  updateChannels:
+    - type: vertica-table
+      syncType: push
+      connectionUrn: urn:dv:connection:0b18c8d2-a6d1-4212-a3d4-33cfd776d905
+      dataSet:
+        path: s3://dataverse-byte/sample-data/inputData/sample4.parquet
+        tableName: test_data_table
