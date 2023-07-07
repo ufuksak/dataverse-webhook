@@ -22,11 +22,7 @@ inputPorts:
     syncType: pull
     connectionUrn: urn:dv:connection:975e48c9-f7bf-4ee0-b5a5-a53f3e2e7b45
     dataSet:
-      path: s3://dp-input-bucket/mpay-tx/mpay-tx.csv
       tableName: details
-      advanceOptions:
-        delimiter: ','
-        header: true
 productState:
   alias: Test0001_input_port
   updateType: 'scheduled'
