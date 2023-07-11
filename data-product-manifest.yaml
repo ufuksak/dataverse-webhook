@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Ufuk_Test0001_input_port2
+alias: Ufuk_Test0001_input_port23
 discoveryPort:
-  name: Ufuk all dq checks warnings2
+  name: Ufuk all dq checks warnings23
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
