@@ -1,8 +1,8 @@
 ---
 version: 0.1.0
-alias: Test0001_input_port12345
+alias: Test0001_input_port123452
 discoveryPort:
-  name: Test all dq checks warnings 1201
+  name: Test all dq checks warnings 12012
   shortDescription: Weather Forecast of the next 7 days for ahmedabad city
   longDescription: Weather Forecast of the next 7 days for ahmedabad city along with the accuracy of the previous forecast
   tags:
@@ -86,14 +86,22 @@ outputPort:
       syncType: push
       connectionUrn: urn:dv:connection:975e48c9-f7bf-4ee0-b5a5-a53f3e2e7b45
       dataSet:
-        tableName: details
-        path: s3://dataverse-byte/sample-data/inputData/sample2.parquet
+        tableName: testpostgres
     - type: vertica-table
       syncType: push
       connectionUrn: urn:dv:connection:0b18c8d2-a6d1-4212-a3d4-33cfd776d905
       dataSet:
-        path: s3://dataverse-byte/sample-data/inputData/sample4.parquet
         tableName: test_data_table
+    - type: s3-csv
+      syncType: push
+      connectionUrn: urn:dv:connection:d277aa22-c3d0-40bc-8816-79f2daabc0f8
+      dataSet:
+        path: s3://dataverse-byte/sample-data/inputData/file1.csv
+    - type: s3-parquet
+      syncType: push
+      connectionUrn: urn:dv:connection:d277aa22-c3d0-40bc-8816-79f2daabc0f8
+      dataSet:
+        path: s3://dataverse-byte/sample-data/inputData/sample3.parquet
 controlPort:
   dataQualityRules:
     RecordCountCheck:
@@ -102,7 +110,7 @@ controlPort:
           expression: ">="
           number: 100
       productState:
-        referenceAlias: Test0001_input_port12345
+        referenceAlias: Test0001_input_port123452
         expression: ==
         number: 100
     NullValueCheck:
@@ -116,14 +124,14 @@ controlPort:
               expression: ">="
               number: 8
       productState:
-        referenceAlias: Test0001_input_port12345
+        referenceAlias: Test0001_input_port123452
         checks:
           - column: amount
             expression: ">="
             number: 0.9
     NullCombinationCheck:
       productState:
-        referenceAlias: Test0001_input_port12345
+        referenceAlias: Test0001_input_port123452
         checks:
           - columns:
               - transaction_reference
@@ -141,7 +149,7 @@ controlPort:
               number: 0.95
               expression: ">="
       productState:
-        referenceAlias: Test0001_input_port12345
+        referenceAlias: Test0001_input_port123452
         checks:
           - column: payment_option
             valueList:
@@ -163,7 +171,7 @@ controlPort:
                 - store_name
                 - transaction_Reference
       productState:
-        referenceAlias: Test0001_input_port12345
+        referenceAlias: Test0001_input_port123452
         checks:
           - columns:
               - store_name
@@ -176,7 +184,7 @@ controlPort:
               number: 2
               expression: "<="
       productState:
-        referenceAlias: Test0001_input_port12345
+        referenceAlias: Test0001_input_port123452
         checks:
           - column: payment_option
             number: 2
